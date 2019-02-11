@@ -8,7 +8,7 @@ router.get('/', (req,res)=>{
 })
 
 router.get('/getweather/:city',(req,res)=>{
-    const apiKey = 'e14a89ec8952ce701b6f079d72908bf2';
+    const apiKey = process.env.KEY;
     const city = req.params.city;
     const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
     request(url,(err,resp, body)=>{
@@ -19,8 +19,9 @@ router.get('/getweather/:city',(req,res)=>{
             })
         }
         else{
+            let bodyJSon = JS
             console.log({'body': body})
-            res.send({'body': body});
+            res.send({'body': body.main});
         }
     })
 })
